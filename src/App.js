@@ -9,7 +9,7 @@ const Headers = (props) =>{
   )
 }
 
-const Content =(parts) => {
+const Content =({parts}) => {
   return(
     <div>
       <p>
@@ -19,16 +19,16 @@ const Content =(parts) => {
         {parts[1].name} {parts[1].exercises}
       </p>
       <p>
-        {parts[2].names} {parts[2].exercises}
-      </p>
+        {parts[2].name} {parts[2].exercises}
+      </p> 
     </div>
   )
 }
 
-const Total = (parts) => {
+const Total = ({parts}) => {
   return(
     <div>
-      <p>Number of exercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}</p>
+     <p>Number of exercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}</p>
     </div>
   )
 }
