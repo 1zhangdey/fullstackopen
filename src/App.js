@@ -1,33 +1,32 @@
 import React from 'react'
 
-const Hello = ({name,age}) =>{
-  
-  const Age = () =>{
-    const year = new Date().getFullYear();
-    return year - age;
+const Hello = ({name,age}) => {
+  const bornYear = () =>{
+    const yearNow = new Date().getFullYear();
+    return(yearNow - age);
   }
-  return(
+  return (
     <div>
       <p>
-      Hello {name}, you are {age} years old currently!
-    </p>
-    <p>
-      According to my calculations, you were born in {Age()}
-    </p>
+        Hello {name}, you are {age} years old
+      </p>
+      <p>
+        This means you were probably born in {bornYear()}!
+      </p>
     </div>
   )
 }
 
 const App = () => {
-  const name = "Mya"
-  const age = 20
+  const name = 'Peter'
+  const age = 10
 
-  return(
+  return (
     <div>
-      <p>Pleasure seeing you here today!</p>
-      <Hello name = {name} age = {age}/>
+      <h1>Greetings</h1>
+      <Hello name="Maya" age={26 + 10} />
+      <Hello name={name} age={age} />
     </div>
-
   )
 }
 
