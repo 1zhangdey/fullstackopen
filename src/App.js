@@ -10,37 +10,26 @@ const Button = ({action,text}) =>{
     </>
   )
 }
-const Stats = ({total,good,neutral,bad,Avg,totalPositive}) => {
+const Stats = ({variable,text,total}) => {
   if (total === 0){
     return(
-      <div>
-        No Feedback Given
-      </div>
+      <>
+      </>
       )
   }
   return(
-    <div>
-    <ul>
-    <li>
-    Total: {total}
-    </li>
-    <li>
-      Good: {good}
-    </li>
-    <li>
-      Neutral: {neutral}
-    </li>
-    <li>
-      Bad: {bad}
-    </li>
-    <li>
-      Avg: {Avg}
-    </li>
-    <li>
-      Percent Postive: {totalPositive} %
-    </li>
-  </ul>
-  </div>
+    <table>
+      <tbody>
+      <tr>
+    <td>
+    {text}:
+    </td>
+    <td>
+       {variable}
+    </td>
+    </tr>
+    </tbody>
+    </table>
   )
 }
 
@@ -80,8 +69,11 @@ const App = () => {
       <h1>
         Total Count!
       </h1>
-      <Stats total = {total} good = {good} bad = {bad} neutral = {neutral} Avg = {Avg} totalPositive = {totalPositive}/>
-      
+      <Stats total = {total} variable = {good} text = 'Good' />
+      <Stats total = {total} variable = {neutral} text = 'Neutral'/>
+      <Stats total = {total} variable = {bad} text = 'Bad'/>
+      <Stats total = {total} variable = {Avg} text = 'Avg'/>
+      <Stats total = {total} variable = {totalPositive} text = 'Total Positive'/>
     </div>
   )
 }
