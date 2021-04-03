@@ -1,79 +1,50 @@
 import React, { useState } from 'react'
 
-
-const Button = ({action,text}) =>{
-  return(
-    <>
-      <button onClick = {action}> 
-        {text}
-      </button>
-    </>
-  )
-}
-const Stats = ({variable,text,total}) => {
-  if (total === 0){
-    return(
-      <>
-      </>
-      )
-  }
-  return(
-    <table>
-      <tbody>
-      <tr>
-    <td>
-    {text}:
-    </td>
-    <td>
-       {variable}
-    </td>
-    </tr>
-    </tbody>
-    </table>
-  )
-}
-
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const [total, setTotal] = useState(0);
-  const [average, setAverage] = useState(0)
-  var Avg = average/total;
-  var totalPositive = parseFloat(good/total);
+  const [index, setIndex] = useState(0)
+  const [vote, setVote] = useState([0, 0, 0, 0, 0, 0])
 
-  const clickSetGood = () => {
-    setGood(good +1);
-    setTotal(total +1);
-    setAverage(average+1)
-  }
-  const clickSetNeutral = () => {
-    setNeutral(neutral +1);
-    setTotal(total +1);
-  }
-  const clickSetBad = () =>{
-    setBad(bad +1);
-    setTotal(total +1);
-    setAverage(average-1)
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  ]
+
+  const handleChange = () => {
+    setIndex(Math.floor(Math.random() * anecdotes.length))
   }
 
+  const voteChange = () => {
+    let copy = [...vote]
+    copy[index]++
+    setVote(copy)
+  }
+
+  let max = Math.max(...vote);
+  console.log(max)
   return (
     <div>
-      <h1>Give Feedback!</h1>
+      <h1>
+        Anecdote of the Day
+      </h1>
+      <div>{anecdotes[index]}
+        <br />
+      Has {vote[index]} Votes
+      </div>
       <div>
-      <Button action = {clickSetGood} text = "Good"/>
-      <Button action = {clickSetNeutral} text = "Neutral"/>
-      <Button action = {clickSetBad} text = "Bad"/>
+        <button onClick={handleChange}>next anecdote</button>
+        <button onClick={voteChange}>vote</button>
       </div>
       <h1>
-        Total Count!
+        Anecdote of all Time!
       </h1>
-      <Stats total = {total} variable = {good} text = 'Good' />
-      <Stats total = {total} variable = {neutral} text = 'Neutral'/>
-      <Stats total = {total} variable = {bad} text = 'Bad'/>
-      <Stats total = {total} variable = {Avg} text = 'Avg'/>
-      <Stats total = {total} variable = {totalPositive} text = 'Total Positive'/>
+      <div>{anecdotes[max]}
+        <br />
+      Has {vote[max]} Votes
+    </div>
     </div>
   )
 }
